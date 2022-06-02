@@ -19,7 +19,20 @@ int main(int argc, char* args[]) {
 		SCREEN_HEIGHT,
 		SDL_WINDOW_SHOWN);
 
-	SDL_Delay(3000);
+	bool quit = false;
+	SDL_Event event;
+
+	while (!quit) {
+		//Update particles
+		//Draw particles
+		//Check for messages/events
+
+		while (SDL_PollEvent(&event)) {
+			if (event.type == SDL_EventType::SDL_QUIT) {
+				quit = true;
+			}
+		}
+	}
 
 	if (window == nullptr) {
 		SDL_Quit();
