@@ -29,7 +29,7 @@ int main(int argc, char* args[]) {
 		return 2;
 	}
 
-	SDL_Texture* texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB888, SDL_TextureAccess::SDL_TEXTUREACCESS_STATIC, SCREEN_WIDTH, SCREEN_HEIGHT);
+	SDL_Texture* texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TextureAccess::SDL_TEXTUREACCESS_STATIC, SCREEN_WIDTH, SCREEN_HEIGHT);
 
 	if (!texture) {
 		cout << "Could not create texture" << endl;
@@ -41,7 +41,11 @@ int main(int argc, char* args[]) {
 
 	std::vector<Uint32> buffer(SCREEN_WIDTH * SCREEN_HEIGHT);
 
-	memset(&buffer[0], 0xFFF, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(Uint32));
+	memset(&buffer[0], 0, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(Uint32));
+
+	for (int i = 0; i < SCREEN_WIDTH * SCREEN_HEIGHT; i++) {
+		buffer[i] = 0x00FF00FF;
+	}
 
 	SDL_UpdateTexture(texture, NULL, &buffer[0], SCREEN_WIDTH * sizeof(Uint32));
 	SDL_RenderClear(renderer);
