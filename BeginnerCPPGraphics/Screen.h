@@ -12,6 +12,7 @@ namespace game {
 	public:
 		const static int SCREEN_WIDTH = 800;
 		const static int SCREEN_HEIGHT = 600;
+		
 
 	private:
 		SDL_Window* m_window = nullptr;
@@ -24,6 +25,8 @@ namespace game {
 		bool init();
 		bool processEvents();
 		void close();
+		void update();
+		void setPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue);
 	};
 
 }
