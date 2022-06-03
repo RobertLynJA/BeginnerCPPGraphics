@@ -5,7 +5,7 @@
 
 using namespace std;
 
-namespace Game {
+namespace game {
 
 	class Screen
 	{
@@ -14,14 +14,13 @@ namespace Game {
 		const static int SCREEN_HEIGHT = 600;
 
 	private:
-		SDL_Window* window = nullptr;
-		SDL_Renderer* renderer = nullptr;
-		SDL_Texture* texture = nullptr;
-		std::vector<Uint32> buffer;
+		SDL_Window* m_window = nullptr;
+		SDL_Renderer* m_renderer = nullptr;
+		SDL_Texture* m_texture = nullptr;
+		std::vector<Uint32> m_buffer;
 
 	public:
 		Screen();
-		~Screen();
 		bool init();
 		bool processEvents();
 		void close();
