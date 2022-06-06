@@ -3,10 +3,14 @@
 #include <vector>
 #include <math.h>
 #include "Screen.h"
+#include <stdlib.h>
+#include <time.h>
 using namespace std;
 using namespace game;
 
 int main(int argc, char* args[]) {
+
+	srand(time(nullptr));
 
 	Screen screen;
 	
