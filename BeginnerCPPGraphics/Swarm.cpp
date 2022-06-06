@@ -4,7 +4,7 @@ namespace game {
 
 	Swarm::Swarm()
 	{
-		m_pParticles.resize(NPARTICLES);
+		m_particles.resize(Swarm::NPARTICLES);
 	}
 
 	Swarm::~Swarm()

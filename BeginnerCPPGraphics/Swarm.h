@@ -10,12 +10,12 @@ namespace game {
 	public:
 		const static int NPARTICLES = 5000;
 	private:
-		const std::vector<Particle> m_pParticles;
+		std::vector<Particle> m_particles;
 	public:
 		Swarm();
 		~Swarm();
 
-		const std::vector<Particle>& getParticles() const { return m_pParticles; }
+		const std::vector<Particle>& getParticles() const { return m_particles; }
 	};
 
 }
