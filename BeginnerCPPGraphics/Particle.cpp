@@ -13,4 +13,12 @@ namespace game {
 	{
 	}
 
+	void Particle::update()
+	{
+		const auto speed = 0.01;
+
+		x += speed;
+		y += speed;
+	}
+
 }

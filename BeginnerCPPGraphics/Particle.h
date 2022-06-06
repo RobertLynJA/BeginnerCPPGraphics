@@ -9,6 +9,7 @@ namespace game {
 
 		Particle();
 		~Particle();
+		void update();
 	};
 
 }

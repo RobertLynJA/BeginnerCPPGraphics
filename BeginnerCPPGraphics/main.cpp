@@ -26,17 +26,20 @@ int main(int argc, char* args[]) {
 		//Update particles
 
 		auto elapsed = SDL_GetTicks();
+
+		swarm.update();
+
 		auto red = min((1 + sin(elapsed * 0.001)) * 128, 255.0);
 		auto green = min((1 + sin(elapsed * 0.002)) * 128, 255.0);
 		auto blue = min((1 + sin(elapsed * 0.003)) * 128, 255.0);
 		
 		//Draw particles
-		auto particles = swarm.getParticles();
+		auto &particles = swarm.getParticles();
 		for (int i = 0; i < Swarm::NPARTICLES; i++) {
-			auto pParticle = &(particles[i]);
+			auto pParticle = particles[i];
 
-			int x = (pParticle->x + 1) * (Screen::SCREEN_WIDTH / 2);
-			int y = (pParticle->y + 1) * (Screen::SCREEN_HEIGHT / 2);
+			int x = (pParticle.x + 1) * (Screen::SCREEN_WIDTH / 2);
+			int y = (pParticle.y + 1) * (Screen::SCREEN_HEIGHT / 2);
 
 			screen.setPixel(x, y, (Uint8)red, (Uint8)green, (Uint8)blue);
 		}

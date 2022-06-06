@@ -16,6 +16,7 @@ namespace game {
 		~Swarm();
 
 		const std::vector<Particle>& getParticles() const { return m_particles; }
+		void update();
 	};
 
 }

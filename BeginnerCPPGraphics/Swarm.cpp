@@ -11,4 +11,12 @@ namespace game {
 	{
 	}
 
+	void Swarm::update()
+	{
+		for (auto &particle : m_particles)
+		{
+			particle.update();
+		}
+	}
+
 }
