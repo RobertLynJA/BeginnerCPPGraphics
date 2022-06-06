@@ -7,6 +7,9 @@ namespace game {
 	{
 		x = ((2.0 * rand()) / RAND_MAX) - 1;
 		y = ((2.0 * rand()) / RAND_MAX) - 1;
+
+		xSpeed = 0.001 * (((2.0 * rand()) / RAND_MAX) - 1);
+		ySpeed = 0.001 * (((2.0 * rand()) / RAND_MAX) - 1);
 	}
 
 	Particle::~Particle()
@@ -15,10 +18,16 @@ namespace game {
 
 	void Particle::update()
 	{
-		const auto speed = 0.01;
+		x += xSpeed;
+		y += ySpeed;
 
-		x += speed;
-		y += speed;
+		if (x <= -1.0 || x >= 1.0) {
+			xSpeed = -xSpeed;
+		}
+
+		if (y <= -1.0 || y >= 1.0) {
+			ySpeed = -ySpeed;
+		}
 	}
 
 }
