@@ -28,7 +28,7 @@ int main(int argc, char* args[]) {
 		auto elapsed = SDL_GetTicks();
 
 		screen.clear();
-		swarm.update();
+		swarm.update(elapsed);
 
 		auto red = min((1 + sin(elapsed * 0.001)) * 128, 255.0);
 		auto green = min((1 + sin(elapsed * 0.002)) * 128, 255.0);

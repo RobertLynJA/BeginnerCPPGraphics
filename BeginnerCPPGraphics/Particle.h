@@ -11,7 +11,7 @@ namespace game {
 
 		Particle();
 		~Particle();
-		void update();
+		void update(int interval);
 	};
 
 }

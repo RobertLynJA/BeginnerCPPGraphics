@@ -2,7 +2,7 @@
 
 namespace game {
 
-	Swarm::Swarm()
+	Swarm::Swarm() : lastTime(0)
 	{
 		m_particles.resize(Swarm::NPARTICLES);
 	}
@@ -11,12 +11,16 @@ namespace game {
 	{
 	}
 
-	void Swarm::update()
+	void Swarm::update(int elapsed)
 	{
+		int interval = elapsed - lastTime;
+
 		for (auto &particle : m_particles)
 		{
-			particle.update();
+			particle.update(interval);
 		}
+
+		lastTime = elapsed;
 	}
 
 }
