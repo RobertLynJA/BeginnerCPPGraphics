@@ -4,7 +4,11 @@ namespace game {
 
 	Screen::Screen()
 	{
-		m_buffer.resize(SCREEN_WIDTH * SCREEN_HEIGHT);
+		m_buffer1.resize(SCREEN_WIDTH * SCREEN_HEIGHT);
+		m_buffer2.resize(SCREEN_WIDTH * SCREEN_HEIGHT);
+
+		m_pBuffer1 = &m_buffer1;
+		m_pBuffer2 = &m_buffer2;
 	}
 
 	bool Screen::init()
@@ -48,7 +52,7 @@ namespace game {
 	}
 
 	void Screen::update() {
-		SDL_UpdateTexture(m_texture, NULL, &m_buffer[0], SCREEN_WIDTH * sizeof(Uint32));
+		SDL_UpdateTexture(m_texture, NULL, &((*m_pBuffer1)[0]), SCREEN_WIDTH * sizeof(Uint32));
 		SDL_RenderClear(m_renderer);
 		SDL_RenderCopy(m_renderer, m_texture, NULL, NULL);
 		SDL_RenderPresent(m_renderer);
@@ -71,12 +75,58 @@ namespace game {
 		color <<= 8;
 		color += 0xFF; //Alpha 255
 
-		m_buffer[(y * SCREEN_WIDTH) + x] = color;
+		(*m_pBuffer1)[(y * SCREEN_WIDTH) + x] = color;
 	}
 
 	void Screen::clear()
 	{
-		memset(&m_buffer[0], 0, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(Uint32));
+		memset(&m_buffer1[0], 0, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(Uint32));
+		memset(&m_buffer2[0], 0, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(Uint32));
+	}
+
+	void Screen::boxBlur()
+	{
+		//Swap
+		auto temp = m_pBuffer1;
+		m_pBuffer1 = m_pBuffer2;
+		m_pBuffer2 = temp;
+
+		for (int y = 0; y < SCREEN_HEIGHT; y++) {
+			for (int x = 0; x < SCREEN_WIDTH; x++) {
+
+				int redTotal = 0;
+				int greenTotal = 0;
+				int blueTotal = 0;
+
+				for (int row = -1; row <= 1; row++) {
+					for (int col = -1; col <= 1; col++) {
+						int currentX = x + col;
+						int currentY = y + row;
+
+						if (currentX >= 0 && currentX < SCREEN_WIDTH && currentY >= 0 && currentY < SCREEN_HEIGHT) {
+							Uint32 color = (*m_pBuffer2)[currentY * SCREEN_WIDTH + currentX];
+
+							color >>= 8;
+							Uint8 blue = color;
+							color >>= 8;
+							Uint8 green = color;
+							color >>= 8;
+							Uint8 red = color;
+
+							redTotal += red;
+							greenTotal += green;
+							blueTotal += blue;
+						}
+					}
+				}
+
+				Uint8 red = redTotal / 9;
+				Uint8 green = greenTotal / 9;
+				Uint8 blue = blueTotal / 9;
+
+				setPixel(x, y, red, green, blue);
+			}
+		}
 	}
 
 	bool Screen::processEvents()

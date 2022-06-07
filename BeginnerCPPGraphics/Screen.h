@@ -17,7 +17,10 @@ namespace game {
 		SDL_Window* m_window = nullptr;
 		SDL_Renderer* m_renderer = nullptr;
 		SDL_Texture* m_texture = nullptr;
-		std::vector<Uint32> m_buffer;
+		std::vector<Uint32> m_buffer1;
+		std::vector<Uint32> m_buffer2;
+		std::vector<Uint32> *m_pBuffer1;
+		std::vector<Uint32> *m_pBuffer2;
 
 	public:
 		Screen();
@@ -27,6 +30,7 @@ namespace game {
 		void update();
 		void setPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue);
 		void clear();
+		void boxBlur();
 	};
 
 }

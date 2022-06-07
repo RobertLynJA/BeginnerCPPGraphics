@@ -27,7 +27,7 @@ int main(int argc, char* args[]) {
 
 		auto elapsed = SDL_GetTicks();
 
-		screen.clear();
+		//screen.clear();
 		swarm.update(elapsed);
 
 		auto red = min((1 + sin(elapsed * 0.001)) * 128, 255.0);
@@ -39,9 +39,11 @@ int main(int argc, char* args[]) {
 		{
 			int x = (particle.x + 1) * (Screen::SCREEN_WIDTH / 2);
 			int y = particle.y * (Screen::SCREEN_WIDTH / 2) + (Screen::SCREEN_HEIGHT / 2);
-
+			
 			screen.setPixel(x, y, (Uint8)red, (Uint8)green, (Uint8)blue);
 		}
+
+		screen.boxBlur();
 
 		//Draw the screen
 		screen.update();
