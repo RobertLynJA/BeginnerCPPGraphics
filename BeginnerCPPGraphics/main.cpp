@@ -35,12 +35,10 @@ int main(int argc, char* args[]) {
 		auto blue = min((1 + sin(elapsed * 0.003)) * 128, 255.0);
 		
 		//Draw particles
-		auto &particles = swarm.getParticles();
-		for (int i = 0; i < Swarm::NPARTICLES; i++) {
-			auto pParticle = particles[i];
-
-			int x = (pParticle.x + 1) * (Screen::SCREEN_WIDTH / 2);
-			int y = (pParticle.y + 1) * (Screen::SCREEN_HEIGHT / 2);
+		for (auto &particle : swarm.getParticles())
+		{
+			int x = (particle.x + 1) * (Screen::SCREEN_WIDTH / 2);
+			int y = particle.y * (Screen::SCREEN_WIDTH / 2) + (Screen::SCREEN_HEIGHT / 2);
 
 			screen.setPixel(x, y, (Uint8)red, (Uint8)green, (Uint8)blue);
 		}

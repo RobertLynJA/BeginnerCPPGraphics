@@ -6,8 +6,8 @@ namespace game {
 	{
 		double x;
 		double y;
-		double xSpeed;
-		double ySpeed;
+		double speed;
+		double direction;
 
 		Particle();
 		~Particle();

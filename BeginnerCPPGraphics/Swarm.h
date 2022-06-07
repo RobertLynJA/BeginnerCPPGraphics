@@ -8,7 +8,7 @@ namespace game {
 	class Swarm
 	{
 	public:
-		const static int NPARTICLES = 1000;
+		const static int NPARTICLES = 5000;
 	private:
 		std::vector<Particle> m_particles;
 	public:

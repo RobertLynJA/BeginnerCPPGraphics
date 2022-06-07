@@ -1,15 +1,14 @@
 #include "Particle.h"
 #include <stdlib.h>
+#define _USE_MATH_DEFINES
+#include <cmath>
 
 namespace game {
 
-	Particle::Particle()
+	Particle::Particle(): x(0), y(0)
 	{
-		x = ((2.0 * rand()) / RAND_MAX) - 1;
-		y = ((2.0 * rand()) / RAND_MAX) - 1;
-
-		xSpeed = 0.001 * (((2.0 * rand()) / RAND_MAX) - 1);
-		ySpeed = 0.001 * (((2.0 * rand()) / RAND_MAX) - 1);
+		direction = (2 * M_PI * rand()) / RAND_MAX;
+		speed = (0.001 * rand()) / RAND_MAX;
 	}
 
 	Particle::~Particle()
@@ -18,16 +17,11 @@ namespace game {
 
 	void Particle::update()
 	{
-		x += xSpeed;
-		y += ySpeed;
+		double xspeed = speed * cos(direction);
+		double yspeed = speed * sin(direction);
 
-		if (x <= -1.0 || x >= 1.0) {
-			xSpeed = -xSpeed;
-		}
-
-		if (y <= -1.0 || y >= 1.0) {
-			ySpeed = -ySpeed;
-		}
+		x += xspeed;
+		y += yspeed;
 	}
 
 }
