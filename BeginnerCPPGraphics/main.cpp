@@ -23,11 +23,9 @@ int main(int argc, char* args[]) {
 	Swarm swarm;
 
 	while (true) {
+		
 		//Update particles
-
 		auto elapsed = SDL_GetTicks();
-
-		//screen.clear();
 		swarm.update(elapsed);
 
 		auto red = min((1 + sin(elapsed * 0.001)) * 128, 255.0);

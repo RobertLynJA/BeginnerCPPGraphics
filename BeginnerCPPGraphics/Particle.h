@@ -12,6 +12,9 @@ namespace game {
 		Particle();
 		~Particle();
 		void update(int interval);
+
+	private:
+		void init();
 	};
 
 }
